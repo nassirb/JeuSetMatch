@@ -67,10 +67,17 @@ class Match {
         if currentSet.isOver {
             addNewSetToMatch()
         } else {
-            addNewGameToCurrentSet()
+            if currentSet.shouldGoToTieBreak {
+                addNewTieBreakGameToCurrentSet()
+            } else {
+                addNewGameToCurrentSet()
+            }
         }
     }
 
+    private func addNewTieBreakGameToCurrentSet() {
+        currentSet.games.append(TieBreakGame())
+    }
     private func addNewGameToCurrentSet() {
         currentSet.games.append(Game())
     }
